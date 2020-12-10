@@ -7,7 +7,7 @@
     "name",
     "stepProviders",
     "flow",
-    "flowVersion"
+    "rpcflow"
   ],
   "properties": {
     "rpcflow": {
