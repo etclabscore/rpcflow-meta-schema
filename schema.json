@@ -1,0 +1,127 @@
+{
+  "$schema": "https://meta.json-schema.tools/",
+  "title": "Flow Meta Schema",
+  "description": "A standard way to define JSON-RPC flows",
+  "type": "object",
+  "required": [
+    "name",
+    "stepProviders",
+    "flow",
+    "flowVersion"
+  ],
+  "properties": {
+    "rpcflow": {
+      "title": "FlowVersion",
+      "description": "**REQUIRED**. This string MUST be the semantic version number of the Specification that the document uses.",
+      "type": "string",
+      "enum": [
+        "0.0.0-development"
+      ]
+    },
+    "name": {
+      "title": "FlowName",
+      "description": "**REQUIRED** Name of the Flow",
+      "type": "string",
+      "examples": [
+        "foobarbaz"
+      ]
+    },
+    "stepProviders": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "namespace",
+          "transport",
+          "url"
+        ],
+        "properties": {
+          "namespace": {
+            "type": "string"
+          },
+          "transport": {
+            "type": "string",
+            "enum": [
+              "postmessageiframe",
+              "postmessagewindow",
+              "http",
+              "websocket"
+            ]
+          },
+          "url": {
+            "type": "string",
+            "format": "uri"
+          }
+        }
+      }
+    },
+    "description": {
+      "title": "FlowDescription",
+      "type": "string",
+      "description": "Markdown description describing the specification extension."
+    },
+    "summary": {
+      "title": "FlowSummary",
+      "type": "string",
+      "description": "A short summary of what the flow is."
+    },
+    "contextSchema": {
+      "$ref": "https://meta.json-schema.tools/"
+    },
+    "context": {
+      "title": "FlowContext",
+      "description": "Additional context provided to the flow",
+      "type": "object"
+    },
+    "flow": {
+      "title": "Flow",
+      "type": "object",
+      "patternProperties": {
+        "": {
+          "type": "object",
+          "required": [
+            "method",
+            "params"
+          ],
+          "properties": {
+            "method": {
+              "type": "string"
+            },
+            "params": {
+              "oneOf": [
+                {
+                  "type": "object"
+                },
+                {
+                  "type": "array"
+                }
+              ]
+            }
+          }
+        }
+      }
+    },
+    "externalDocumentation": {
+      "title": "FlowExternalDocumentationObject",
+      "type": "object",
+      "additionalProperties": false,
+      "description": "Information about external documentation.",
+      "required": [
+        "url"
+      ],
+      "properties": {
+        "description": {
+          "title": "FlowExternalDocumentationObjectDescription",
+          "description": "external documentation description.",
+          "type": "string"
+        },
+        "url": {
+          "title": "FlowExternalDocumentationObjectUrl",
+          "description": "external documentation description.",
+          "type": "string",
+          "format": "uri"
+        }
+      }
+    }
+  }
+}
