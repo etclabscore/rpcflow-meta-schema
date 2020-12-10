@@ -27,8 +27,10 @@
       ]
     },
     "stepProviders": {
+      "title": "StepProviders",
       "type": "array",
       "items": {
+        "title": "StepProvider",
         "type": "object",
         "required": [
           "namespace",
@@ -37,9 +39,11 @@
         ],
         "properties": {
           "namespace": {
+            "title": "Namespace",
             "type": "string"
           },
           "transport": {
+            "title": "Transport",
             "type": "string",
             "enum": [
               "postmessageiframe",
@@ -49,6 +53,7 @@
             ]
           },
           "url": {
+            "title": "Url",
             "type": "string",
             "format": "uri"
           }
@@ -78,6 +83,7 @@
       "type": "object",
       "patternProperties": {
         "": {
+          "title": "FlowObject",
           "type": "object",
           "required": [
             "method",
@@ -93,7 +99,8 @@
                   "type": "object"
                 },
                 {
-                  "type": "array"
+                  "type": "array",
+                  "items": true
                 }
               ]
             }
