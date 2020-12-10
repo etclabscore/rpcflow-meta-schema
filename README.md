@@ -2,7 +2,9 @@
 
 This is the JSON Schema file for the RPCFlow Specification. You may use it to validate your RPCFlow documents.
 
-This repo also contains the code which takes the schema, and generates typings for various languages. Currently supported languages:
+This repo also contains the code which takes the schema, and generates typings for various languages. 
+
+Currently supported languages:
 
 - Typescript
 - Rust
