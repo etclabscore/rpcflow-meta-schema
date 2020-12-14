@@ -1,7 +1,7 @@
 {
   "$schema": "https://meta.json-schema.tools/",
   "title": "Flow Meta Schema",
-  "description": "A standard way to define JSON-RPC flows",
+  "description": "A standard way to define JSON-RPC flows.",
   "type": "object",
   "required": [
     "name",
@@ -20,7 +20,7 @@
     },
     "name": {
       "title": "FlowName",
-      "description": "**REQUIRED** Name of the Flow",
+      "description": "**REQUIRED**. Name of the Flow.",
       "type": "string",
       "examples": [
         "foobarbaz"
@@ -75,11 +75,12 @@
     },
     "context": {
       "title": "FlowContext",
-      "description": "Additional context provided to the flow",
+      "description": "Additional context provided to the flow. If `contextSchema` exists, `context` **MUST** validate against it. Context can be used via the `\\\"${context.<path>}\\\"` [Runtime Expression](https://github.com/etclabscore/json-template-language#what-is-it-used-for)",
       "type": "object"
     },
     "flow": {
       "title": "Flow",
+      "description": "Describes how to call JSON-RPC methods at runtime and use their results via [Runtime Expressions](https://github.com/etclabscore/json-template-language#what-is-it-used-for). Flow results can be used via \\\"${results.<keyName>}\\\" where `keyName` refers to the key of the flow object to use the results from.",
       "type": "object",
       "patternProperties": {
         "": {
@@ -91,9 +92,13 @@
           ],
           "properties": {
             "method": {
-              "type": "string"
+              "title": "FlowMethod",
+              "type": "string",
+              "description": "**REQUIRED**. Canonical name for the method call."
             },
             "params": {
+              "title": "FlowParams",
+              "description": "A list of parameters to be called for this method.",
               "oneOf": [
                 {
                   "type": "object"
@@ -112,19 +117,22 @@
       "title": "FlowExternalDocumentationObject",
       "type": "object",
       "additionalProperties": false,
-      "description": "Information about external documentation.",
+      "summary": "Information about external documentation.",
+      "description": "Allows referencing an external resource for extended documentation.",
       "required": [
         "url"
       ],
       "properties": {
         "description": {
           "title": "FlowExternalDocumentationObjectDescription",
-          "description": "external documentation description.",
+          "description": "A verbose explanation of the target documentation. GitHub Flavored Markdown syntax MAY be used for rich text representation.",
+          "summary": "External documentation description.",
           "type": "string"
         },
         "url": {
           "title": "FlowExternalDocumentationObjectUrl",
-          "description": "external documentation description.",
+          "description": "**REQUIRED**. The URL for the target documentation. Value MUST be in the format of a URL.",
+          "summary": "External Documentation URI.",
           "type": "string",
           "format": "uri"
         }
