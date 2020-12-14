@@ -6,7 +6,7 @@
 export type FlowVersion = "0.0.0-development";
 /**
  *
- * **REQUIRED** Name of the Flow
+ * **REQUIRED**. Name of the Flow.
  *
  * @example
  * `foobarbaz`
@@ -156,34 +156,50 @@ export type JSONSchemaBoolean = boolean;
 export type JSONSchema = JSONSchemaObject | JSONSchemaBoolean;
 /**
  *
- * Additional context provided to the flow
+ * Additional context provided to the flow. If `contextSchema` exists, `context` **MUST** validate against it. Context can be used via the `\"${context.<path>}\"` [Runtime Expression](https://github.com/etclabscore/json-template-language#what-is-it-used-for)
  *
  */
 export interface FlowContext { [key: string]: any; }
+/**
+ *
+ * **REQUIRED**. Canonical name for the method call.
+ *
+ */
+export type FlowMethod = string;
 export interface ObjectHAgrRKSz { [key: string]: any; }
 export type SetOfAnykhpArGaq = AlwaysTrue[];
-export type OneOfObjectHAgrRKSzSetOfAnykhpArGaqQYzyujLV = ObjectHAgrRKSz | SetOfAnykhpArGaq;
+/**
+ *
+ * A list of parameters to be called for this method.
+ *
+ */
+export type FlowParams = ObjectHAgrRKSz | SetOfAnykhpArGaq;
 export interface FlowObject {
-  method: StringDoaGddGA;
-  params: OneOfObjectHAgrRKSzSetOfAnykhpArGaqQYzyujLV;
+  method: FlowMethod;
+  params: FlowParams;
   [k: string]: any;
 }
+/**
+ *
+ * Describes how to call JSON-RPC methods at runtime and use their results via [Runtime Expressions](https://github.com/etclabscore/json-template-language#what-is-it-used-for). Flow results can be used via \"${results.<keyName>}\" where `keyName` refers to the key of the flow object to use the results from.
+ *
+ */
 export interface Flow { [key: string]: any; }
 /**
  *
- * external documentation description.
+ * A verbose explanation of the target documentation. GitHub Flavored Markdown syntax MAY be used for rich text representation.
  *
  */
 export type FlowExternalDocumentationObjectDescription = string;
 /**
  *
- * external documentation description.
+ * **REQUIRED**. The URL for the target documentation. Value MUST be in the format of a URL.
  *
  */
 export type FlowExternalDocumentationObjectUrl = string;
 /**
  *
- * Information about external documentation.
+ * Allows referencing an external resource for extended documentation.
  *
  */
 export interface FlowExternalDocumentationObject {
@@ -192,7 +208,7 @@ export interface FlowExternalDocumentationObject {
 }
 /**
  *
- * A standard way to define JSON-RPC flows
+ * A standard way to define JSON-RPC flows.
  *
  */
 export interface FlowMetaSchema {

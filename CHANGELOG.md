@@ -1,3 +1,10 @@
+## [1.0.1](https://github.com/etclabscore/rpcflow-meta-schema/compare/1.0.0...1.0.1) (2020-12-14)
+
+
+### Bug Fixes
+
+* improve descriptions ([ecb198f](https://github.com/etclabscore/rpcflow-meta-schema/commit/ecb198f81fcdc7dfcdb3b26f726cf577372dca2d))
+
 # 1.0.0 (2020-12-10)
 
 

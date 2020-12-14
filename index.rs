@@ -13,7 +13,7 @@ pub enum FlowVersion {
 }
 /// FlowName
 ///
-/// **REQUIRED** Name of the Flow
+/// **REQUIRED**. Name of the Flow.
 ///
 /// # Example
 ///
@@ -180,35 +180,44 @@ pub enum JSONSchema {
 }
 /// FlowContext
 ///
-/// Additional context provided to the flow
+/// Additional context provided to the flow. If `contextSchema` exists, `context` **MUST** validate against it. Context can be used via the `\"${context.<path>}\"` [Runtime Expression](https://github.com/etclabscore/json-template-language#what-is-it-used-for)
 ///
 pub type FlowContext = HashMap<String, Option<serde_json::Value>>;
+/// FlowMethod
+///
+/// **REQUIRED**. Canonical name for the method call.
+///
+pub type FlowMethod = String;
 pub type ObjectHAgrRKSz = HashMap<String, Option<serde_json::Value>>;
 pub type SetOfAnykhpArGaq = Vec<AlwaysTrue>;
 #[derive(Serialize, Deserialize)]
-pub enum OneOfObjectHAgrRKSzSetOfAnykhpArGaqQYzyujLV {
+pub enum FlowParams {
     ObjectHAgrRKSz,
     SetOfAnykhpArGaq
 }
 #[derive(Serialize, Deserialize)]
 pub struct FlowObject {
-    pub(crate) method: StringDoaGddGA,
-    pub(crate) params: OneOfObjectHAgrRKSzSetOfAnykhpArGaqQYzyujLV,
+    pub(crate) method: FlowMethod,
+    pub(crate) params: FlowParams,
 }
+/// Flow
+///
+/// Describes how to call JSON-RPC methods at runtime and use their results via [Runtime Expressions](https://github.com/etclabscore/json-template-language#what-is-it-used-for). Flow results can be used via \"${results.<keyName>}\" where `keyName` refers to the key of the flow object to use the results from.
+///
 pub type Flow = HashMap<String, Option<serde_json::Value>>;
 /// FlowExternalDocumentationObjectDescription
 ///
-/// external documentation description.
+/// A verbose explanation of the target documentation. GitHub Flavored Markdown syntax MAY be used for rich text representation.
 ///
 pub type FlowExternalDocumentationObjectDescription = String;
 /// FlowExternalDocumentationObjectUrl
 ///
-/// external documentation description.
+/// **REQUIRED**. The URL for the target documentation. Value MUST be in the format of a URL.
 ///
 pub type FlowExternalDocumentationObjectUrl = String;
 /// FlowExternalDocumentationObject
 ///
-/// Information about external documentation.
+/// Allows referencing an external resource for extended documentation.
 ///
 #[derive(Serialize, Deserialize)]
 pub struct FlowExternalDocumentationObject {
@@ -217,7 +226,7 @@ pub struct FlowExternalDocumentationObject {
 }
 /// FlowMetaSchema
 ///
-/// A standard way to define JSON-RPC flows
+/// A standard way to define JSON-RPC flows.
 ///
 #[derive(Serialize, Deserialize)]
 pub struct FlowMetaSchema {

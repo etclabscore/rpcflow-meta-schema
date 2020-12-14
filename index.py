@@ -10,7 +10,7 @@ from typing import Mapping
 """
 class FlowVersion(Enum):
     0.0.0-DEVELOPMENT = 0
-"""**REQUIRED** Name of the Flow
+"""**REQUIRED**. Name of the Flow.
 """
 FlowName = NewType("FlowName", str)
 
@@ -155,33 +155,38 @@ class JSONSchemaObject(TypedDict):
 JSONSchemaBoolean = NewType("JSONSchemaBoolean", bool)
 
 JSONSchema = NewType("JSONSchema", Union[JSONSchemaObject, JSONSchemaBoolean])
-"""Additional context provided to the flow
+"""Additional context provided to the flow. If `contextSchema` exists, `context` **MUST** validate against it. Context can be used via the `\"${context.<path>}\"` [Runtime Expression](https://github.com/etclabscore/json-template-language#what-is-it-used-for)
 """
 FlowContext = NewType("FlowContext", Mapping[Any, Any])
+"""**REQUIRED**. Canonical name for the method call.
+"""
+FlowMethod = NewType("FlowMethod", str)
 
 ObjectHAgrRKSz = NewType("ObjectHAgrRKSz", Mapping[Any, Any])
 
 SetOfAnykhpArGaq = NewType("SetOfAnykhpArGaq", List[AlwaysTrue])
-
-OneOfObjectHAgrRKSzSetOfAnykhpArGaqQYzyujLV = NewType("OneOfObjectHAgrRKSzSetOfAnykhpArGaqQYzyujLV", Union[ObjectHAgrRKSz, SetOfAnykhpArGaq])
+"""A list of parameters to be called for this method.
+"""
+FlowParams = NewType("FlowParams", Union[ObjectHAgrRKSz, SetOfAnykhpArGaq])
 
 class FlowObject(TypedDict):
-    method: Optional[StringDoaGddGA]
-    params: Optional[OneOfObjectHAgrRKSzSetOfAnykhpArGaqQYzyujLV]
-
+    method: Optional[FlowMethod]
+    params: Optional[FlowParams]
+"""Describes how to call JSON-RPC methods at runtime and use their results via [Runtime Expressions](https://github.com/etclabscore/json-template-language#what-is-it-used-for). Flow results can be used via \"${results.<keyName>}\" where `keyName` refers to the key of the flow object to use the results from.
+"""
 Flow = NewType("Flow", Mapping[Any, Any])
-"""external documentation description.
+"""A verbose explanation of the target documentation. GitHub Flavored Markdown syntax MAY be used for rich text representation.
 """
 FlowExternalDocumentationObjectDescription = NewType("FlowExternalDocumentationObjectDescription", str)
-"""external documentation description.
+"""**REQUIRED**. The URL for the target documentation. Value MUST be in the format of a URL.
 """
 FlowExternalDocumentationObjectUrl = NewType("FlowExternalDocumentationObjectUrl", str)
-"""Information about external documentation.
+"""Allows referencing an external resource for extended documentation.
 """
 class FlowExternalDocumentationObject(TypedDict):
     description: Optional[FlowExternalDocumentationObjectDescription]
     url: Optional[FlowExternalDocumentationObjectUrl]
-"""A standard way to define JSON-RPC flows
+"""A standard way to define JSON-RPC flows.
 """
 class FlowMetaSchema(TypedDict):
     rpcflow: Optional[FlowVersion]
